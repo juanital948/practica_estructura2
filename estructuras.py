@@ -119,11 +119,10 @@ class DoublyLinkedList:
     self.__size += 1
 
 class Vehiculo:
-    def __init__(self,placa,tipo,prioridad):
-      self.placa = placa
-      self.tipo = tipo
-      self.prioridad = prioridad
-      self.revisado = False
+    def __init__(self, placa, tipo, prioridad):
+      self.placa: str = placa
+      self.tipo: str = tipo
+      self.prioridad: int = prioridad
 
     def __str__(self):
       return f"{self.placa} {self.tipo} {self.prioridad}"
