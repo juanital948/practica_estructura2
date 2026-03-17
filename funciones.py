@@ -25,6 +25,34 @@ def paso_preferencial(via):
         
         nodo = siguiente
 
+def eliminar_camiones(via):
+
+    nodo = via.head
+
+    while nodo:
+        
+        siguiente = nodo.next
+        vehiculo = nodo.value
+
+        if vehiculo.tipo == "camion" and vehiculo.prioridad > 3:
+
+            if nodo == via.head:
+                via.head = nodo.next
+                if via.head:
+                    via.head.prev = None
+                else:
+                    via.tail = None
+
+            elif nodo == via.tail:
+                via.tail = nodo.prev
+                via.tail.next = None
+            
+            else:
+                nodo.prev.next = nodo.next
+                nodo.next.prev = nodo.prev
+
+        nodo = siguiente
+
 
 def main():
 
@@ -35,8 +63,10 @@ def main():
     via.append(Vehiculo("CCC333", "camion" , 4))
     via.append(Vehiculo("DDD444", "auto" , 2))
     via.append(Vehiculo("EEE555", "moto", 1))
+    via.append(Vehiculo("OOO999", "camion" , 4))
     via.append(Vehiculo("HHH666", "auto" , 2))
     via.append(Vehiculo("KKK777", "moto" , 1))
+    via.append(Vehiculo("RRR888", "camion" , 4))
 
     print("Via original:\n")
     print(via)
@@ -46,6 +76,13 @@ def main():
     paso_preferencial(via)
 
     print("Via después del paso preferencial:\n")
+    print(via)
+
+    print("\n")
+    
+    eliminar_camiones(via)
+
+    print("Via después de eliminar camiones:\n")
     print(via)
 
 
