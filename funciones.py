@@ -82,7 +82,47 @@ def invertir_via(via):
         nodo = siguiente
     
     via.head, via.tail = via.tail, via.head
+
+
+def reorganizar_via(via):
+
+    nueva_head = None
+    nueva_tail = None
+
+    for p in range(1, 6):
+
+        nodo = via.head
+
+        while nodo:
+            siguiente = nodo.next
+
+            if nodo.value.prioridad == p:
+
+                if nodo.prev:
+                    nodo.prev.next = nodo.next
+                else:
+                    via.head = nodo.next
+                
+                if nodo.next:
+                    nodo.next.prev = nodo.prev
+                else:
+                    via.tail = nodo.prev
+                
+                nodo.prev = nueva_tail
+                nodo.next = None
+
+                if nueva_tail:
+                    nueva_tail.next = nodo
+                else:
+                    nueva_head = nodo
+                
+                nueva_tail = nodo
+
+            nodo = siguiente
+
         
+    via.head = nueva_head
+    via.tail = nueva_tail
 
 
     
@@ -124,6 +164,13 @@ def main():
     invertir_via(via)
 
     print("Via después de invertir:\n")
+    print(via)
+
+    print("\n")
+
+    reorganizar_via(via)
+
+    print("Via después de reorganizar por prioridad:\n")
     print(via)
 
 
