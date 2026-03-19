@@ -53,6 +53,39 @@ def eliminar_camiones(via):
 
         nodo = siguiente
 
+def accidente(via):
+    ...
+
+def invertir_via(via):
+
+    autos = 0
+    motos = 0
+
+    nodo = via.head
+    while nodo:
+        if nodo.value.tipo == "auto":
+            autos += 1
+        elif nodo.value.tipo == "moto":
+            motos += 1
+        nodo = nodo.next 
+    
+    if autos <= motos:
+        return
+    
+    nodo = via.head
+    while nodo:
+        siguiente = nodo.next
+
+        nodo.next = nodo.prev
+        nodo.prev = siguiente
+
+        nodo = siguiente
+    
+    via.head, via.tail = via.tail, via.head
+        
+
+
+    
 
 def main():
 
@@ -67,6 +100,7 @@ def main():
     via.append(Vehiculo("HHH666", "auto" , 2))
     via.append(Vehiculo("KKK777", "moto" , 1))
     via.append(Vehiculo("RRR888", "camion" , 4))
+    via.append(Vehiculo("XXX000", "auto", 2))
 
     print("Via original:\n")
     print(via)
@@ -83,6 +117,13 @@ def main():
     eliminar_camiones(via)
 
     print("Via después de eliminar camiones:\n")
+    print(via)
+
+    print("\n")
+
+    invertir_via(via)
+
+    print("Via después de invertir:\n")
     print(via)
 
 
